@@ -6,6 +6,8 @@
     <title>@yield('title'){{ config('app.name', 'eKsięgarnia') }}</title>
     <link rel="icon" type="image/png" href="http://www.freeiconspng.com/uploads/book-icon--icon-search-engine-6.png">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          rel="stylesheet">
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top ">
@@ -35,7 +37,7 @@
             </ul>
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Zaloguj się</a>
+                        <a class="nav-link" href="{{ route('login') }}">Zaloguj się</a>
                     </li>
                     <li class="nav-item ">
                         <a class="nav-link" href="#">Zajerestruj się</a>

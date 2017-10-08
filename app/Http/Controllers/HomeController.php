@@ -5,8 +5,13 @@ namespace App\Http\Controllers;
 use App\Author;
 use App\Books;
 use App\Categories;
+use App\Http\Requests\BooksRequest;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input as Input;
+use Illuminate\Support\Facades\Session;
+use function MongoDB\BSON\toJSON;
 
 class HomeController extends Controller
 {
@@ -40,8 +45,27 @@ class HomeController extends Controller
         $books->categories_id = $request->categories_id;
         $books->author_id = $request->author_id;
         $books->img = $file->getClientOriginalName();
+        $books->desc = $request->desc;
         $books->save();
         return redirect()->route('books.index');
+    }
+
+    public function plus(Request $request, $id) {
+        $books = Books::find($id);
+        $user = User::find(Auth::user()->id);
+        $books->plus = $request->plus;
+        $user->save();
+        $books->save();
+        return redirect()->route('books.single', $books);
+    }
+
+    public function minus(Request $request, $id) {
+        $books = Books::find($id);
+        $user = User::find(Auth::user()->id);
+        $books->minus = $request->plus;
+        $user->save();
+        $books->save();
+        return redirect()->route('books.single', $books);
     }
 
 }

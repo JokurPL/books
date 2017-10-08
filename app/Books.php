@@ -23,4 +23,8 @@ class Books extends Model
         return $this->hasOne('App\Author', 'id', 'author_id');
     }
 
+    public function glos() {
+        return $this->hasOne('App\Author', 'id', 'author_id');
+    }
+
 }

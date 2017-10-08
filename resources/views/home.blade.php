@@ -10,6 +10,10 @@
             <input type="text" class="form-control" name="title" id="title" placeholder="Wpisz nazwę książki">
         </div>
         <div class="form-group">
+            <label for="desc">Opis książki</label>
+            <input type="text" class="form-control" name="desc" id="desc" placeholder="Wpisz opis książki">
+        </div>
+        <div class="form-group">
             <label for="categories">Kategoria</label>
             <select name="categories_id" class="form-control" id="categories_id">
                 @foreach($category as $cat)
