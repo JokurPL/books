@@ -30,21 +30,34 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         @foreach($cate = DB::table('categories')->get() as $cat)
-                            <a class="dropdown-item" href="category/{{$cat->id}}">{{$cat->name}}</a>
+                            <a class="dropdown-item" href="{{ route('books.category', $cat->id) }}">{{$cat->name}}</a>
                         @endforeach
                     </div>
                 </li>
             </ul>
                 <ul class="navbar-nav">
+                    @if(Auth::guest())
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('login') }}">Zaloguj się</a>
                     </li>
                     <li class="nav-item ">
                         <a class="nav-link" href="#">Zajerestruj się</a>
                     </li>
-                </ul>
 
-        </div>
+                    @else
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('logout') }}"
+                               onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                Wyloguj się
+                            </a>
+
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                {{ csrf_field() }}
+                            </form>
+                        </li>
+                    @endif
+                </ul>
     </nav>
 
     <div class="container">

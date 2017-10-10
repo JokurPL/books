@@ -26,6 +26,17 @@ Route::get('/ksiazka/{book}', [
     'uses' => 'MainController@single'
 ]);
 
+Route::get('/kategoria/{category}', [
+    'as' => 'books.category',
+    'uses' => 'MainController@category'
+]);
+
+Route::get('/autor/{author}', [
+    'as' => 'books.author',
+    'uses' => 'MainController@sauthor'
+]);
+
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

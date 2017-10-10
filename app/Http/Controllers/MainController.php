@@ -20,6 +20,16 @@ class MainController extends Controller
         return view('books.book', compact('book'));
     }
 
+    public function category($category) {
+        $books = Books::where('categories_id', $category)->get();
+        $cat = DB::table('categories')->where('id', $category)->get();
+        return view('books.categories', compact('books', 'cat'));
+    }
 
+    public function sauthor($author) {
+        $books = Books::where('author_id', $author)->get();
+        $cat = DB::table('authors')->where('id', $author)->get();
+        return view('books.author', compact('books', 'cat'));
+    }
 
 }

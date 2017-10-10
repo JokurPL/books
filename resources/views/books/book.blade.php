@@ -16,6 +16,7 @@
                 </div>
                 <hr>
                 <div class="text-right grades">
+                    <p>Kategoria: <a class="text-right" href="{{ route('books.category', $book->categories->id) }}">{{$book->categories->name}}</a></p>
                     <h2 style="margin-right: 2rem;">Ocena</h2>
                     <form  method="post" action="" class="d-inline-block" style="margin-right: 1rem">
                         {{csrf_field()}}
@@ -29,7 +30,7 @@
                     </form>
                 </div>
             </div>
-            <a href="{{ route('books.index') }}" style="margin: 1rem;" class="btn btn-primary btn-lg">Powrót</a>
+            <a href="{{ URL::previous() }}" style="margin: 1rem;" class="btn btn-primary btn-lg">Powrót</a>
         </div>
 
 @endsection
