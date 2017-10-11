@@ -8,10 +8,17 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
           rel="stylesheet">
+    <script type="text/javascript" src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=jrjc7e0xuvmi98ya39hwwcxx2jw0x6qmyo9fguc0c3ue4pg1"></script>
+    <script>
+        tinymce.init({
+            selector: '#desc',
+            language: 'pl'
+        });
+    </script>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top ">
-        <a class="navbar-brand" href="{{ route('books.index') }}">{{ config('app.name', 'eKsięgarnia') }}</a>
+        <a class="navbar-brand" href="{{ route('home') }}">{{ config('app.name', 'eKsięgarnia') }}</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -34,8 +41,21 @@
                         @endforeach
                     </div>
                 </li>
+
             </ul>
                 <ul class="navbar-nav">
+                    @if(!Auth::guest())
+                        @if(Auth::user()->roles[0]->name === 'Administrator' || Auth::user()->roles[0]->name === 'Redaktor')
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            {{  Auth::user()->name  }}
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="">xd</a>
+                        </div>
+                    </li>
+                        @endif
+                    @endif
                     @if(Auth::guest())
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('login') }}">Zaloguj się</a>

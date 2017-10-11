@@ -37,6 +37,14 @@ class HomeController extends Controller
         return view('home', compact('category', 'author'));
     }
 
+    public function save_cat(Request $request) {
+        $cat = new Categories();
+        $cat->name = $request->category;
+        $cat->save();
+
+        return redirect()->route('addbook');
+    }
+
     public function save(Request $request) {
         $file = Input::file('img');
         $file->move('uploads', $file->getClientOriginalName());
@@ -47,8 +55,9 @@ class HomeController extends Controller
         $books->img = $file->getClientOriginalName();
         $books->desc = $request->desc;
         $books->save();
-        return redirect()->route('books.index');
+        return redirect()->route('home');
     }
+
 
     public function plus(Request $request, $id) {
         $books = Books::find($id);

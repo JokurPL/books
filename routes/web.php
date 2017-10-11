@@ -12,19 +12,30 @@
 */
 
 Route::get('/', [
-    'as' => 'books.index',
+    'as' => 'home',
     'uses' => 'MainController@index'
 ]);
 
+
 Route::group([
     'middleware' => 'roles',
-    'roles' => ['Admin', 'Redaktor']
+    'roles' => ['Administrator', 'Redaktor']
 ], function () {
-    Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('/dodaj-ksiazke', 'HomeController@index')->name('addbook');
 
     Route::post('/zapisz-ksiazke', [
         'as' => 'books.save',
         'uses' =>'HomeController@save'
+    ]);
+
+    Route::post('/zapisz-autora', [
+        'as' => 'books.save_author',
+        'uses' =>'HomeController@save_author'
+    ]);
+
+    Route::post('/zapisz-kategorie', [
+        'as' => 'books.save_cat',
+        'uses' =>'HomeController@save_cat'
     ]);
 });
 

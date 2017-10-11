@@ -12,7 +12,7 @@
                 <h4 class="text-secondary"><i>{{$book->author->name}}</i></h4>
                 <hr>
                 <div>
-                    <p>{{$book->desc}}</p>
+                    <p>{!! $book->desc !!}</p>
                 </div>
                 <hr>
                 <div class="text-right grades">
