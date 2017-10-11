@@ -16,10 +16,18 @@ Route::get('/', [
     'uses' => 'MainController@index'
 ]);
 
-Route::post('/zapisz-ksiazke', [
-    'as' => 'books.save',
-    'uses' =>'HomeController@save'
-]);
+Route::group([
+    'middleware' => 'roles',
+    'roles' => ['Admin', 'Redaktor']
+], function () {
+    Route::get('/home', 'HomeController@index')->name('home');
+
+    Route::post('/zapisz-ksiazke', [
+        'as' => 'books.save',
+        'uses' =>'HomeController@save'
+    ]);
+});
+
 
 Route::get('/ksiazka/{book}', [
     'as' => 'books.single',
@@ -39,4 +47,3 @@ Route::get('/autor/{author}', [
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
