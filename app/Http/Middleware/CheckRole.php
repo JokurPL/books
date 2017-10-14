@@ -26,6 +26,6 @@ class CheckRole
             return $next($request);
         }
 
-        return redirect(route('books.index'));
+        return redirect(route('home'));
     }
 }

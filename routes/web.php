@@ -16,6 +16,24 @@ Route::get('/', [
     'uses' => 'MainController@index'
 ]);
 
+Route::group([
+    'middleware' => 'roles',
+    'roles' => 'Administrator',
+], function () {
+
+    Route::get('/panel-administratora', [
+        'as' => 'books.panel_admina',
+        'uses' => 'MainController@panel'
+    ]);
+
+    Route::get('/panel-administratora/wszystkie-ksiazki', [
+        'as' => 'books.all_books',
+        'uses' => 'MainController@panel_all_books'
+    ]);
+
+
+
+});
 
 Route::group([
     'middleware' => 'roles',
@@ -36,6 +54,11 @@ Route::group([
     Route::post('/zapisz-kategorie', [
         'as' => 'books.save_cat',
         'uses' =>'HomeController@save_cat'
+    ]);
+
+    Route::put('/ksiazka/{book}', [
+        'as' => 'books.save',
+        'uses' =>'HomeController@save'
     ]);
 });
 

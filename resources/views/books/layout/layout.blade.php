@@ -50,9 +50,11 @@
                         <a class="nav-link dropdown-toggle" href id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             {{  Auth::user()->name  }}
                         </a>
+                        @if(Auth::user()->roles[0]->name === 'Administrator')
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="">xd</a>
+                            <a class="dropdown-item" href="{{ route('books.panel_admina') }}">Panel Administratora</a>
                         </div>
+                        @endif
                     </li>
                         @endif
                     @endif

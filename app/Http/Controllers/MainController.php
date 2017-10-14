@@ -35,4 +35,13 @@ class MainController extends Controller
         return view('books.author', compact('books', 'cat'));
     }
 
+    public function panel() {
+        $books = Books::all();
+        return view('books.panel', compact('books'));
+    }
+
+    public function all_books() {
+        return view('books.panel_all');
+    }
+
 }
