@@ -29,6 +29,18 @@
                         <button class="btn btn-danger"><p><b><i class="material-icons">thumb_down</i></b></p>{{$book->minus}}</button>
                     </form>
                 </div>
+                @if(!Auth::guest())
+                @if(Auth::user()->roles[0]->name === 'Administrator' || Auth::user()->roles[0]->name === 'Redaktor')
+                <div style="text-align: right; margin: 1rem;">
+                    <a style="margin: 1rem; float: left;" href="{{ route('books.edit', $book) }}" class="btn btn-info text-right btn-lg">Edytuj</a>
+                    <form action="{{ route('books.destroy', $book) }}" method="post">
+                        {{ csrf_field() }}
+                        <input type="hidden" name="_method" value="DELETE" >
+                        <button style="margin: 1rem; cursor: pointer;" class="btn btn-danger text-right btn-lg">Usuń</button>
+                    </form>
+                </div>
+                @endif
+                @endif
             </div>
             <a href="{{ URL::previous() }}" style="margin: 1rem;" class="btn btn-primary btn-lg">Powrót</a>
         </div>

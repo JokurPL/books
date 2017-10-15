@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Author;
 use App\Books;
 use App\Categories;
 use App\User;
@@ -37,7 +38,9 @@ class MainController extends Controller
 
     public function panel() {
         $books = Books::all();
-        return view('books.panel', compact('books'));
+        $categories = Categories::all();
+        $author = Author::all();
+        return view('books.panel', compact('books', 'categories', 'author'));
     }
 
     public function all_books() {

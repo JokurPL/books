@@ -21,17 +21,12 @@ Route::group([
     'roles' => 'Administrator',
 ], function () {
 
-    Route::get('/panel-administratora', [
-        'as' => 'books.panel_admina',
-        'uses' => 'MainController@panel'
-    ]);
+
 
     Route::get('/panel-administratora/wszystkie-ksiazki', [
         'as' => 'books.all_books',
         'uses' => 'MainController@panel_all_books'
     ]);
-
-
 
 });
 
@@ -56,10 +51,76 @@ Route::group([
         'uses' =>'HomeController@save_cat'
     ]);
 
-    Route::put('/ksiazka/{book}', [
-        'as' => 'books.save',
-        'uses' =>'HomeController@save'
+    Route::get('/ksiazka/edytuj/{book}', [
+        'as' => 'books.edit',
+        'uses' =>'HomeController@book_edit'
     ]);
+
+    Route::put('ksiazka/{book}', [
+        'uses' => 'HomeController@book_update',
+        'as' => 'books.update'
+    ]);
+
+    Route::delete('/ksiazka/{book}', [
+        'uses' => 'HomeController@book_destroy',
+        'as' => 'books.destroy'
+    ]);
+
+    Route::get('/kategoria/dodaj', [
+        'uses' => 'HomeController@cat_add',
+        'as' => 'books.cat_add'
+    ]);
+
+    Route::post('/zapisz-kategorie', [
+        'as' => 'books.cat_save',
+        'uses' =>'HomeController@cat_save'
+    ]);
+
+    Route::get('/kategoria/edytuj/{cat}', [
+        'as' => 'books.cat_edit',
+        'uses' =>'HomeController@cat_edit'
+    ]);
+
+    Route::put('/kategoria/{cat}', [
+        'as' => 'books.cat_e_save',
+        'uses' =>'HomeController@cat_e_save'
+    ]);
+
+    Route::delete('/kategoria/{cat}', [
+        'uses' => 'HomeController@cat_destroy',
+        'as' => 'books.cat_destroy'
+    ]);
+
+    Route::get('/panel-administratora', [
+        'as' => 'books.panel_admina',
+        'uses' => 'MainController@panel'
+    ]);
+// -----------------K-A-T-E-G-O-R-I-A--------------------
+    Route::get('/autor/dodaj', [
+        'uses' => 'HomeController@author_add',
+        'as' => 'books.author_add'
+    ]);
+
+    Route::post('/zapisz-autora', [
+        'as' => 'books.author_save',
+        'uses' =>'HomeController@author_save'
+    ]);
+
+    Route::get('/autor/edytuj/{author}', [
+        'as' => 'books.author_edit',
+        'uses' =>'HomeController@author_edit'
+    ]);
+
+    Route::put('/autor/{author}', [
+        'as' => 'books.author_e_save',
+        'uses' =>'HomeController@author_e_save'
+    ]);
+
+    Route::delete('/autor/{author}', [
+        'uses' => 'HomeController@author_destroy',
+        'as' => 'books.author_destroy'
+    ]);
+
 });
 
 
@@ -77,7 +138,6 @@ Route::get('/autor/{author}', [
     'as' => 'books.author',
     'uses' => 'MainController@sauthor'
 ]);
-
 
 Auth::routes();
 

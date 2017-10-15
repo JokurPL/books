@@ -2,6 +2,9 @@
     @section('content')
         <h1 class="text-center" style="margin: 1rem;">Popularne książki</h1>
         <hr>
+        @if(count($books) <= 0)
+            <h1 class="text-center text-danger" style="font-size: 10rem;">Brak książek :(</h1>
+        @else
         <div class="row mx-auto">
             @foreach($books as $book)
 
@@ -20,6 +23,6 @@
             <nav class="mx-auto" aria-label="Page navigation example">
                 {{$books->links('vendor.pagination.bootstrap-4')}}
             </nav>
-
         </div>
+        @endif
     @endsection

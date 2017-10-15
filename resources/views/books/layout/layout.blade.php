@@ -15,6 +15,7 @@
             language: 'pl'
         });
     </script>
+    @yield('head-scripts')
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top ">
