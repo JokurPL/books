@@ -57,4 +57,14 @@ class User extends Authenticatable
         }
         return false;
     }
+
+    public function upvote() {
+        return $this->hasOne('App\upvote', 'id', 'users_id');
+
+    }
+
+    public function downVote() {
+        return $this->hasOne('App\downVote', 'id', 'users_id');
+
+    }
 }

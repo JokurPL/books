@@ -5,10 +5,13 @@ namespace App\Http\Controllers;
 use App\Author;
 use App\Books;
 use App\Categories;
+use App\DownVote;
 use App\Http\Requests\BooksRequest;
+use App\Upvote;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input as Input;
 use Illuminate\Support\Facades\Session;
 use function MongoDB\BSON\toJSON;
@@ -59,24 +62,27 @@ class HomeController extends Controller
     }
 
 
-    public function plus(Request $request, $id) {
-        $books = Books::find($id);
-        $user = User::find(Auth::user()->id);
-        $books->plus = $request->plus;
-        $user->save();
-        $books->save();
-        return redirect()->route('books.single', $books);
+    public function up_vote(Request $request)
+    {
+        $up_vote = new Upvote();
+        $up_vote->books_id = $request->books_id;
+        $up_vote->users_id = $request->users_id;
+        $up_vote->vote += 1;
+        $up_vote->save();
+
+        return redirect()->route('books.single', $request->books_id);
     }
 
-    public function minus(Request $request, $id) {
-        $books = Books::find($id);
-        $user = User::find(Auth::user()->id);
-        $books->minus = $request->plus;
-        $user->save();
-        $books->save();
-        return redirect()->route('books.single', $books);
-    }
+    public function down_vote(Request $request)
+    {
+        $down_vote = new DownVote();
+        $down_vote->books_id = $request->books_id;
+        $down_vote->users_id = $request->users_id;
+        $down_vote->vote += 1;
+        $down_vote->save();
 
+        return redirect()->route('books.single', $request->books_id);
+    }
     public function book_edit(Books $book)
     {
         $cats = Categories::all();
@@ -173,4 +179,53 @@ class HomeController extends Controller
         $author->delete();
         return redirect()->route('books.panel_admina');
     }
+
+    public function stop_up_vote(Request $request)
+    {
+        $vote = DB::table('upvotes')->where('books_id', $request->books_id)->get();
+        foreach ($vote as $value) {
+            if ($value->users_id === $request->users_id) {
+                return redirect()->route('books.single', $request->books_id);
+            } else {
+                $lol = DB::table('upvotes')->where('books_id', '=', $request->books_id)->where('users_id', '=', $request->users_id)->delete();
+                $down_vote = new DownVote();
+                $down_vote->books_id = $request->books_id;
+                $down_vote->users_id = $request->users_id;
+                $down_vote->vote += 1;
+                $down_vote->save();
+                return redirect()->route('books.single', $request->books_id);
+            }
+        }
+    }
+
+    public function stop_down_vote(Request $request)
+    {
+        $vote = DB::table('down_votes')->where('books_id', $request->books_id)->get();
+        foreach ($vote as $value) {
+            if ($value->users_id === $request->users_id) {
+                return redirect()->route('books.single', $request->books_id);
+            } else {
+                $lol = DB::table('down_votes')->where('books_id', '=', $request->books_id)->where('users_id', '=', $request->users_id)->delete();
+                $down_vote = new Upvote();
+                $down_vote->books_id = $request->books_id;
+                $down_vote->users_id = $request->users_id;
+                $down_vote->vote += 1;
+                $down_vote->save();
+                return redirect()->route('books.single', $request->books_id);
+            }
+        }
+    }
+
+
+//    public function down_vote(Request $request)
+//    {
+//        $vote =
+//        $down_vote = new DownVote();
+//        $down_vote->books_id = $request->books_id;
+//        $down_vote->users_id = $request->users_id;
+//        $down_vote->vote += 1;
+//        $down_vote->save();
+//
+//        return redirect()->route('books.single', $request->books_id);
+//    }
 }

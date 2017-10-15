@@ -139,5 +139,25 @@ Route::get('/autor/{author}', [
     'uses' => 'MainController@sauthor'
 ]);
 
+Route::post('ksiazka/lubie-to', [
+    'as' => 'books.up_vote',
+    'uses' => 'HomeController@up_vote'
+]);
+
+Route::post('ksiazka/juz-nie-lubie', [
+    'as' => 'books.stop_up_vote',
+    'uses' => 'HomeController@stop_up_vote'
+]);
+
+Route::post('ksiazka/nie-lubie', [
+    'as' => 'books.down_vote',
+    'uses' => 'HomeController@down_vote'
+]);
+
+Route::post('ksiazka/juz-lubie', [
+    'as' => 'books.stop_down_vote',
+    'uses' => 'HomeController@stop_down_vote'
+]);
+
 Auth::routes();
 

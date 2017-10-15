@@ -22,8 +22,6 @@ class CreateBooksTable extends Migration
             $table->foreign('author_id')->references('id')->on('authors')->onDelete('cascade');
             $table->longText('desc');
             $table->string('img');
-            $table->integer('plus')->default(0);
-            $table->integer('minus')->default(0);
             $table->timestamps();
         });
     }

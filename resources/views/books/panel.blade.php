@@ -49,7 +49,7 @@
         </tbody>
     </table>
 
-    <h1 style="font-size: 4rem" class="text-center">Kategorie <a class="btn btn-primary btn-sm" href="{{ route('addbook') }}">Dodaj</a></h1>
+    <h1 style="font-size: 4rem" class="text-center">Kategorie <a class="btn btn-primary btn-sm" href="{{ route('books.cat_add') }}">Dodaj</a></h1>
     <hr>
     <table class="table table-responsive table-inverse text-center table-striped table-bordered" id="tabelka">
         <thead>
