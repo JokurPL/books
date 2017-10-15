@@ -25,34 +25,41 @@ class MainController extends Controller
     public function single(Books $book) {
         $upvote = DB::table('upvotes')->where('books_id', $book->id)->get();
         $downvote = DB::table('down_votes')->where('books_id', $book->id)->get();
-
+        $l_uvotes = 0;
+        foreach ($upvote as $vote) {
+            $l_uvotes += $vote->vote;
+        }
+        $l_dvotes = 0;
+        foreach ($downvote as $vote) {
+            $l_dvotes += $vote->vote;
+        }
         $u_votes = 0;
         $d_votes = 0;
         $ok_up = false;
         $ok_d = false;
-        foreach ($upvote as $vote) {
-            $u_votes += $vote->vote;
-            $users = $vote->users_id;
-            $u_id = $vote->id;
-            if ($users === Auth::user()->id) {
-                $ok_up = true;
+        if (!Auth::guest()) {
+            foreach ($upvote as $vote) {
+                $u_votes += $vote->vote;
+                $users = $vote->users_id;
+                $u_id = $vote->id;
+                if ($users === Auth::user()->id) {
+                    $ok_up = true;
+                } else {
+                    $ok_up = false;
+                }
             }
-            else {
-                $ok_up = false;
+            foreach ($downvote as $vote) {
+                $d_votes += $vote->vote;
+                $users = $vote->users_id;
+                $d_id = $vote->id;
+                if ($users === Auth::user()->id) {
+                    $ok_d = true;
+                } else {
+                    $ok_d = false;
+                }
             }
         }
-        foreach ($downvote as $vote) {
-            $d_votes += $vote->vote;
-            $users = $vote->users_id;
-            $d_id = $vote->id;
-            if ($users === Auth::user()->id) {
-                $ok_d = true;
-            }
-            else {
-                $ok_d = false;
-            }
-        }
-        return view('books.book', compact('book', 'u_votes', 'ok_up', 'ok_d', 'd_votes', 'u_id', 'd_id', 'db'));
+        return view('books.book', compact('book', 'u_votes', 'ok_up', 'ok_d', 'd_votes', 'u_id', 'd_id', 'db', 'l_uvotes', 'l_dvotes'));
     }
 
     public function category($category) {
