@@ -31,6 +31,11 @@ class User extends Authenticatable
         return $this->belongsTo('App\Books');
     }
 
+    public function comments() {
+        return $this->belongsTo('App\Comments');
+
+    }
+
     public function roles() {
         return $this->belongsToMany(Roles::class, 'roles_has_users', 'users_id', 'roles_id')->withTimestamps();
     }
@@ -67,4 +72,6 @@ class User extends Authenticatable
         return $this->hasOne('App\downVote', 'id', 'users_id');
 
     }
+
+
 }

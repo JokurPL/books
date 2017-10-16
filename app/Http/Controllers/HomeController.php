@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Author;
 use App\Books;
 use App\Categories;
+use App\Comments;
 use App\DownVote;
 use App\Http\Requests\BooksRequest;
 use App\Upvote;
@@ -216,16 +217,14 @@ class HomeController extends Controller
         }
     }
 
+    public function add_comment(Request $request)
+    {
+        $comment = new Comments();
+        $comment->users_id = $request->users_id;
+        $comment->books_id = $request->books_id;
+        $comment->comment = $request->comment;
+        $comment->save();
 
-//    public function down_vote(Request $request)
-//    {
-//        $vote =
-//        $down_vote = new DownVote();
-//        $down_vote->books_id = $request->books_id;
-//        $down_vote->users_id = $request->users_id;
-//        $down_vote->vote += 1;
-//        $down_vote->save();
-//
-//        return redirect()->route('books.single', $request->books_id);
-//    }
+        return redirect()->route('books.single', $request->books_id);
+    }
 }

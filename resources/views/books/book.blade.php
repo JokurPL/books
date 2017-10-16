@@ -7,7 +7,7 @@
                 <a href="{{ URL::previous() }}" style="margin: 1rem;" class="btn btn-primary btn-lg">Powrót</a>
             </div>
             <div class="col-sm-8 text-center" style="margin-top: 1rem;">
-                <h1>{{$book->title}}</h1>
+                <h1>{{$book->title}} </h1>
                 <h4 class="text-secondary"><i>{{$book->author->name}}</i></h4>
                 <hr>
                 <div>
@@ -74,10 +74,11 @@
                         <input type="hidden" name="_method" value="DELETE" >
                         <button style="margin: 1rem; cursor: pointer;" class="btn btn-danger text-right btn-lg">Usuń</button>
                     </form>
-
                 </div>
+            </div>
                 @endif
                 @endif
+
                 @else
                     <div class="d-inline-block" style="margin-right: 1rem">
                         <button data-toggle="tooltip" data-placement="left" title="Chcesz zagłosować? Zaloguj lub zajerestruj się!" class="btn btn-success disabled"><p><b><i class="material-icons">thumb_up</i></b></p> {{ $l_uvotes }}</button>
@@ -90,7 +91,36 @@
             </div>
             <hr>
             <h1>Komentarze</h1>
-            
+            <hr>
+            @foreach($comments as $value)
+            <blockquote style="padding: 1rem;" class="blockquote border border-primary">
+                <p class="mb-0" style="font-size: 1rem; text-align: left">{{ $value->comment}}</p>
+                <footer class="blockquote-footer text-left"><a href="">{{ $value->user->name}}</a></footer>
+            </blockquote>
+                <nav class="mx-auto" aria-label="Page navigation example">
+                    {{$comments->links('vendor.pagination.bootstrap-4')}}
+                </nav>
+            @endforeach
+            <hr>
+            <h2>Dodaj komentarz</h2>
+            @if(!Auth::guest())
+            <form action="{{ route('books.add_comment') }}" method="post">
+                <div class="form-group">
+                    <label for="comment">Treść komentarza</label>
+                    {{ csrf_field() }}
+                    <input type="hidden" name="users_id" value="{{ Auth::user()->id }}">
+                    <input type="hidden" name="books_id" value="{{$book->id}}">
+                    <textarea class="form-control" id="comment" name="comment" rows="6"></textarea>
+                    <button class="btn btn-info text-left" style="cursor: pointer;margin-top: 1rem; margin-right: 80%;">Dodaj komentarz</button>
+                </div>
+            </form>
+                @else
+                <div class="form-group">
+                    <label for="comment">Treść komentarza</label>
+                    <textarea  style="cursor: not-allowed"; class="form-control disabled" id="comment" name="comment" rows="6"></textarea>
+                    <button data-toggle="tooltip" data-placement="left" title="Chcesz dodać komentarz? Zaloguj lub zajerestruj się!" class="btn btn-info text-left disabled" style="cursor: not-allowed;margin-top: 1rem; margin-right: 80%;">Dodaj komentarz</button>
+                </div>
+            @endif
         </div>
 @endsection
 @section('scripts')

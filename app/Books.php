@@ -32,4 +32,8 @@ class Books extends Model
 
     }
 
+    public function comments() {
+        return $this->hasOne('App\Comments', 'id', 'books_id');
+    }
+
 }

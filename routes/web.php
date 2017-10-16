@@ -159,5 +159,10 @@ Route::post('ksiazka/juz-lubie', [
     'uses' => 'HomeController@stop_down_vote'
 ]);
 
+Route::post('ksiazka/dodaj-komentarz', [
+    'as' => 'books.add_comment',
+    'uses' => 'HomeController@add_comment'
+]);
+
 Auth::routes();
 

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Author;
 use App\Books;
 use App\Categories;
+use App\Comments;
+use App\Roles;
 use App\Upvote;
 use App\User;
 use Illuminate\Http\Request;
@@ -25,6 +27,8 @@ class MainController extends Controller
     public function single(Books $book) {
         $upvote = DB::table('upvotes')->where('books_id', $book->id)->get();
         $downvote = DB::table('down_votes')->where('books_id', $book->id)->get();
+        $comments = Comments::where('books_id', '=', $book->id)->paginate(5);
+        $roles = Roles::all();
         $l_uvotes = 0;
         foreach ($upvote as $vote) {
             $l_uvotes += $vote->vote;
@@ -59,7 +63,7 @@ class MainController extends Controller
                 }
             }
         }
-        return view('books.book', compact('book', 'u_votes', 'ok_up', 'ok_d', 'd_votes', 'u_id', 'd_id', 'db', 'l_uvotes', 'l_dvotes'));
+        return view('books.book', compact('book', 'roles','comments','u_votes', 'ok_up', 'ok_d', 'd_votes', 'u_id', 'd_id', 'db', 'l_uvotes', 'l_dvotes'));
     }
 
     public function category($category) {
