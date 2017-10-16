@@ -2,6 +2,7 @@
 
 @section('content')
     <br>
+    <div class="container">
     <form method="post" action="{{route('books.save')}}" enctype="multipart/form-data">
         {{ csrf_field() }}
 
@@ -37,4 +38,17 @@
             </div>
         <button type="submit" class="btn btn-primary">Dodaj</button>
     </form>
+    </div>
+@endsection
+@section('scripts')
+    <script type="text/javascript" src="..\js\languages\pl.js"></script>
+    <script>
+        $(function() {
+            $('textarea').froalaEditor({ heightMin: 100,
+                heightMin: 500,
+                language: 'pl'
+            })
+        });
+    </script>
+
 @endsection

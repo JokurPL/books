@@ -41,3 +41,15 @@
     </form>
     </div>
 @endsection
+@section('scripts')
+    <script type="text/javascript" src="{{ url('/js/languages/pl.js') }}"></script>
+    <script>
+        $(function() {
+            $('textarea').froalaEditor({ heightMin: 100,
+                heightMin: 500,
+                language: 'pl'
+            })
+        });
+    </script>
+
+@endsection

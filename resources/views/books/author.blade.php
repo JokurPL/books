@@ -3,7 +3,7 @@
     <div class="container">
     @foreach($cat as $c)
         <p>
-            <h1>Autor: <u><i class="text-primary">{{$c->name}}</i></u></h1>
+            <h1>Autor: <u><i class="text-primary ">{{$c->name}}</i></u></h1>
             <hr>
         </p>
     @endforeach
