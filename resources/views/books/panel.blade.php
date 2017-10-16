@@ -1,5 +1,6 @@
 @extends('books.layout.layout')
 @section('content')
+    <div class="container">
     <div style="margin: 1rem;" class="text-center">
         <h1>Panel Administratora</h1>
         <hr>
@@ -102,4 +103,5 @@
         @endforeach
         </tbody>
     </table>
+    </div>
 @endsection

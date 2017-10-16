@@ -1,5 +1,6 @@
 @extends('books.layout.layout')
 @section('content')
+    <div class="container">
     <h1 style="margin: 1rem;">Dodaj autora</h1>
     <form method="post" action="{{ route('books.author_save') }}">
         {{ csrf_field() }}
@@ -9,4 +10,5 @@
         </div>
         <button style="cursor: pointer;" type="submit" class="btn btn-primary">Dodaj</button>
     </form>
+    </div>
 @endsection

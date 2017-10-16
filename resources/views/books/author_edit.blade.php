@@ -1,5 +1,6 @@
 @extends('books.layout.layout')
 @section('content')
+    <div class="container">
     <h1 style="margin: 1rem;">Edytuj autora</h1>
     <form method="post" action="{{ route('books.author_e_save', $author) }}">
         {{ csrf_field() }}
@@ -10,4 +11,5 @@
         </div>
         <button type="submit" style="cursor: pointer;" class="btn btn-success">Edytuj</button>
     </form>
+    </div>
 @endsection

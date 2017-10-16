@@ -1,5 +1,6 @@
 @extends('books.layout.layout')
 @section('content')
+    <div class="container">
     <h1 style="margin: 1rem">Edytuj książkę</h1>
     <hr>
     <form style="margin: 2rem;" action="{{ route('books.update', $book) }}" method="post" enctype="multipart/form-data">
@@ -38,4 +39,5 @@
         </div>
         <button class="btn btn-success btn-lg">Edytuj</button>
     </form>
+    </div>
 @endsection

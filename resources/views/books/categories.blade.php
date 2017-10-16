@@ -1,9 +1,10 @@
 @extends('books.layout.layout')
 @section('content')
-
+    <div class="container">
     @foreach($cat as $c)
         <p>
-            <h1>Książki z kategorią: <i>{{$c->name}}</i></h1>
+            <h1>Kategoria: <u><i class="text-primary">{{$c->name}}</i></u></h1>
+            <hr>
         </p>
     @endforeach
     <div class="row mx-auto">
@@ -19,5 +20,6 @@
         </div>
 
     @endforeach
+    </div>
     </div>
 @endsection

@@ -1,5 +1,6 @@
 @extends('books.layout.layout')
 @section('content')
+    <div class="container">
     <h1 style="margin: 1rem;">Edytuj kategorie</h1>
     <form method="post" action="{{ route('books.cat_e_save', $cat) }}">
         {{ csrf_field() }}
@@ -10,4 +11,5 @@
         </div>
         <button type="submit" style="cursor: pointer;" class="btn btn-success">Edytuj</button>
     </form>
+    </div>
 @endsection

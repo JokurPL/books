@@ -1,6 +1,7 @@
 @extends('books.layout.layout')
 @section('title'){{$book->title}} - @endsection
 @section('content')
+    <div class="container">
         <div class="row mx-auto">
             <div class="col-sm-4 center-block">
                 <img src="../uploads/{{$book->img}}" class="img-fluid" style="margin-top: 1rem;" height="60%" alt="Zdjęcie {{$book->title}}"/>
@@ -63,7 +64,7 @@
                         </div>
 
                     @endif
-                </div>
+
 
                 @if(!Auth::guest())
                 @if(Auth::user()->roles[0]->name === 'Administrator' || Auth::user()->roles[0]->name === 'Redaktor')
@@ -75,10 +76,11 @@
                         <button style="margin: 1rem; cursor: pointer;" class="btn btn-danger text-right btn-lg">Usuń</button>
                     </form>
                 </div>
-            </div>
-                @endif
-                @endif
 
+                @endif
+                @endif
+                </div>
+            </div>
                 @else
                     <div class="d-inline-block" style="margin-right: 1rem">
                         <button data-toggle="tooltip" data-placement="left" title="Chcesz zagłosować? Zaloguj lub zajerestruj się!" class="btn btn-success disabled"><p><b><i class="material-icons">thumb_up</i></b></p> {{ $l_uvotes }}</button>
@@ -97,10 +99,11 @@
                 <p class="mb-0" style="font-size: 1rem; text-align: left">{{ $value->comment}}</p>
                 <footer class="blockquote-footer text-left"><a href="">{{ $value->user->name}}</a></footer>
             </blockquote>
-                <nav class="mx-auto" aria-label="Page navigation example">
-                    {{$comments->links('vendor.pagination.bootstrap-4')}}
-                </nav>
+
             @endforeach
+        <nav class="mx-auto" aria-label="Page navigation example">
+            {{$comments->links('vendor.pagination.bootstrap-4')}}
+        </nav>
             <hr>
             <h2>Dodaj komentarz</h2>
             @if(!Auth::guest())
@@ -110,7 +113,7 @@
                     {{ csrf_field() }}
                     <input type="hidden" name="users_id" value="{{ Auth::user()->id }}">
                     <input type="hidden" name="books_id" value="{{$book->id}}">
-                    <textarea class="form-control" id="comment" name="comment" rows="6"></textarea>
+                    <textarea required class="form-control" id="comment" name="comment" rows="6"></textarea>
                     <button class="btn btn-info text-left" style="cursor: pointer;margin-top: 1rem; margin-right: 80%;">Dodaj komentarz</button>
                 </div>
             </form>
@@ -121,7 +124,8 @@
                     <button data-toggle="tooltip" data-placement="left" title="Chcesz dodać komentarz? Zaloguj lub zajerestruj się!" class="btn btn-info text-left disabled" style="cursor: not-allowed;margin-top: 1rem; margin-right: 80%;">Dodaj komentarz</button>
                 </div>
             @endif
-        </div>
+            </div>
+    </div>
 @endsection
 @section('scripts')
     <script>

@@ -21,17 +21,41 @@
     </form>
         </div>
         <div class="col-sm-6">
-            <form style="margin: 5rem;">
+            <form style="margin: 5rem;" method="POST" action="{{ route('register') }}">
+                {{csrf_field()}}
                 <h1>Zarejestruj się</h1>
                 <hr>
                 <div class="form-group">
+                    <label for="name"><h4>Nazwa użytkownika</h4></label>
+                    <input type="text" class="form-control" id="name" placeholder="Wpisz swój nick">
+                    @if ($errors->has('name'))
+                        <span class="help-block">
+                                        <strong>{{ $errors->first('name') }}</strong>
+                                    </span>
+                    @endif
+                </div>
+                <div class="form-group">
                     <label for="exampleInputEmail1"><h4>Adres e-mail</h4></label>
-                    <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Wpisz swój e-mail">
+                    <input type="email" name="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Wpisz swój e-mail">
                     <small id="emailHelp" class="form-text text-muted">Pamiętaj, aby e-mail był prawdziwy!</small>
+                    @if ($errors->has('email'))
+                        <span class="help-block">
+                                        <strong>{{ $errors->first('email') }}</strong>
+                                    </span>
+                    @endif
                 </div>
                 <div class="form-group">
                     <label for="password"><h4>Hasło</h4></label>
-                    <input type="password" class="form-control" id="password" placeholder="Hasło">
+                    <input type="password" name="password" class="form-control" id="password" placeholder="Hasło">
+                    @if ($errors->has('password'))
+                        <span class="help-block">
+                                        <strong>{{ $errors->first('password') }}</strong>
+                                    </span>
+                    @endif
+                </div>
+                <div class="form-group">
+                    <label for="password2"><h4>Powtórz hasło</h4></label>
+                    <input type="password" name="password_confirmation" class="form-control" id="password2" placeholder="Powtórz hasło">
                 </div>
                 <div class="form-check">
                     <label class="form-check-label">
@@ -39,6 +63,7 @@
                         Zapoznałem się z <a href>regulaminem</a>.
                     </label>
                 </div>
+
                 <button type="submit" style="cursor: pointer;" class="btn btn-lg btn-primary">Zarejestruj się</button>
             </form>
         </div>
