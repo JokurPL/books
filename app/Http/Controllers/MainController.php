@@ -79,15 +79,21 @@ class MainController extends Controller
     }
 
     public function panel() {
-        $books = Books::all();
-        $categories = Categories::all();
-        $author = Author::all();
-        return view('books.panel', compact('books', 'categories', 'author'));
+        $books = Books::paginate(10);
+        $categories = Categories::paginate(10);
+        $author = Author::paginate(10);
+        $comments = Comments::paginate(10);
+        return view('books.panel', compact('books', 'categories', 'author', 'comments'));
     }
 
     public function all_books() {
         return view('books.panel_all');
     }
 
+    public function destroy_comment(Comments $comment)
+    {
+        $comment->delete();
 
+        return redirect()->route('books.panel_admina');
+    }
 }

@@ -38,6 +38,9 @@
                             <p class="mb-0" style="font-size: 1rem; text-align: left">{{ $value->comment}}</p>
                         </blockquote>
                 @endforeach
+                    <nav class="mx-auto" aria-label="Page navigation example">
+                        {{$comments->links('vendor.pagination.bootstrap-4')}}
+                    </nav>
                 </div>
             </div>
         </div>

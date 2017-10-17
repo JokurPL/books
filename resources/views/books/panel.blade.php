@@ -49,7 +49,9 @@
         @endforeach
         </tbody>
     </table>
-
+        <nav class="mx-auto text-center"  aria-label="pagination">
+            {{$books->links('vendor.pagination.bootstrap-4')}}
+        </nav>
     <h1 style="font-size: 4rem" class="text-center">Kategorie <a class="btn btn-primary btn-sm" href="{{ route('books.cat_add') }}">Dodaj</a></h1>
     <hr>
     <table class="table table-responsive table-inverse text-center table-striped table-bordered" id="tabelka">
@@ -76,7 +78,9 @@
         @endforeach
         </tbody>
     </table>
-
+        <nav class="mx-auto text-center"  aria-label="pagination">
+            {{$categories->links('vendor.pagination.bootstrap-4')}}
+        </nav>
     <h1 style="font-size: 4rem" class="text-center">Autorzy <a class="btn btn-primary btn-sm" href="{{ route('books.author_add') }}">Dodaj</a></h1>
     <hr>
     <table class="table table-responsive table-inverse text-center table-striped table-bordered" id="tabelka">
@@ -103,5 +107,39 @@
         @endforeach
         </tbody>
     </table>
+        <nav class="mx-auto text-center"  aria-label="pagination">
+            {{$author->links('vendor.pagination.bootstrap-4')}}
+        </nav>
+        <h1 style="font-size: 4rem" class="text-center">Komentarze</h1>
+        <hr>
+        <table class="table table-responsive table-inverse text-center table-striped table-bordered" id="tabelka">
+            <thead>
+            <tr>
+                <th class="text-center">ID</th>
+                <th class="text-center">Autor</th>
+                <th class="text-center">Treść</th>
+                <th class="text-center">Usuń</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach($comments as $value)
+                <tr>
+                    <td>{{ $value->id }}</td>
+                    <td><a href="{{ route('books.user', $value->user)}}">{{ $value->user->name }}</a></td>
+                    <td>{{ $value->comment }}</td>
+                    <form action="{{ route('books.com_destroy', $value) }}" method="post">
+                        {{ csrf_field() }}
+                        <input type="hidden" name="_method" value="DELETE" >
+                        <td><button style="cursor: pointer;" class="btn btn-danger">Usuń</button></td>
+                    </form>
+                </tr>
+            @endforeach
+
+            </tbody>
+
+        </table>
+        <nav class="mx-auto text-center"  aria-label="pagination">
+            {{$comments->links('vendor.pagination.bootstrap-4')}}
+        </nav>
     </div>
 @endsection

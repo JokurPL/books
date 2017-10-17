@@ -21,12 +21,16 @@ Route::group([
     'roles' => 'Administrator',
 ], function () {
 
-
-
     Route::get('/panel-administratora/wszystkie-ksiazki', [
         'as' => 'books.all_books',
         'uses' => 'MainController@panel_all_books'
     ]);
+
+    Route::delete('/usun-komentarz/{comment}', [
+        'uses' => 'MainController@destroy_comment',
+        'as' => 'books.com_destroy'
+    ]);
+
 
 });
 
