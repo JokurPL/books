@@ -35,7 +35,10 @@ class User extends Authenticatable
         return $this->belongsTo('App\Comments');
 
     }
+    public function upvote() {
+        return $this->belongsTo('App\Upvote');
 
+    }
     public function roles() {
         return $this->belongsToMany(Roles::class, 'roles_has_users', 'users_id', 'roles_id')->withTimestamps();
     }
@@ -63,10 +66,6 @@ class User extends Authenticatable
         return false;
     }
 
-    public function upvote() {
-        return $this->hasOne('App\upvote', 'id', 'users_id');
-
-    }
 
     public function downVote() {
         return $this->hasOne('App\downVote', 'id', 'users_id');

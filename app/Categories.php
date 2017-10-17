@@ -11,6 +11,10 @@ class Categories extends Model
     ];
 
     public function books() {
-        return $this->belongsTo('App\Books', 'name');
+        return $this->hasOne('App\Books', 'id', 'books_id');
+    }
+
+    public function user() {
+        return $this->belongsTo('App\User', 'name');
     }
 }

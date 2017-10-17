@@ -164,5 +164,11 @@ Route::post('ksiazka/dodaj-komentarz', [
     'uses' => 'HomeController@add_comment'
 ]);
 
+// ---------------------USERS------------------
+Route::get('/uzytkownik/{user}', [
+    'as' => 'books.user',
+    'uses' => 'UserController@user'
+]);
+
 Auth::routes();
 

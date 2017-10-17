@@ -97,7 +97,7 @@
             @foreach($comments as $value)
             <blockquote style="padding: 1rem;" class="blockquote border border-primary">
                 <p class="mb-0" style="font-size: 1rem; text-align: left">{{ $value->comment}}</p>
-                <footer class="blockquote-footer text-left"><a href="">{{ $value->user->name}}</a></footer>
+                <footer class="blockquote-footer text-left"><a href="{{ route('books.user', $value->user) }}">{{ $value->user->name}}</a></footer>
             </blockquote>
 
             @endforeach

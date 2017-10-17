@@ -23,12 +23,14 @@ class Books extends Model
         return $this->hasOne('App\Author', 'id', 'author_id');
     }
 
-    public function upvote() {
-        return $this->hasOne('App\Upvote', 'id', 'books_id');
-    }
 
     public function downVote() {
-        return $this->hasOne('App\downVote', 'id', 'books_id');
+        return $this->hasOne('App\DownVote', 'id', 'books_id');
+
+    }
+
+    public function upvote() {
+        return $this->hasOne('App\Upvote', 'id', 'books_id');
 
     }
 
