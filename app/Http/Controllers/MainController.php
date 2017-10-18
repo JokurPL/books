@@ -27,7 +27,7 @@ class MainController extends Controller
     public function single(Books $book) {
         $upvote = DB::table('upvotes')->where('books_id', $book->id)->get();
         $downvote = DB::table('down_votes')->where('books_id', $book->id)->get();
-        $comments = Comments::where('books_id', '=', $book->id)->paginate(5);
+        $comments = Comments::where('books_id', '=', $book->id)->orderBy('id', 'desc')->paginate(5);
         $roles = Roles::all();
         $l_uvotes = 0;
         foreach ($upvote as $vote) {

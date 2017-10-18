@@ -36,6 +36,7 @@
                         <blockquote style="padding: 1rem;" class="blockquote border border-primary">
                             <span class="text-secondary">Komentarz do książki: <a class="text-primary" href="{{ route('books.single', $value->books) }}">{{ $value->books->title }}</a></span>
                             <p class="mb-0" style="font-size: 1rem; text-align: left">{{ $value->comment}}</p>
+                            <span class="text-secondary" style="font-size: 70%;">Dodany: <b>{{$value->created_at}}</b></span>
                         </blockquote>
                 @endforeach
                     <nav class="mx-auto" aria-label="Page navigation example">

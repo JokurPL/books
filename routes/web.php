@@ -174,5 +174,10 @@ Route::get('/uzytkownik/{user}', [
     'uses' => 'UserController@user'
 ]);
 
+Route::post('/zajerestruj-siee/', [
+    'as' => 'books.register',
+    'uses' => 'RegController@index'
+]);
+
 Auth::routes();
 
