@@ -30,7 +30,7 @@
                     <hr>
                 </div>
                 <div class="col-sm-12">
-                    <h1 class="text-center">Komentarze</h1>
+                    <h1 class="text-center">Komentarze (<span class="text-success">{{Count($comments)}}</span>)</h1>
                     <hr>
                 @foreach($comments as $value)
                         <blockquote style="padding: 1rem;" class="blockquote border border-primary">

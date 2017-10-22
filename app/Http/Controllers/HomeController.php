@@ -8,6 +8,7 @@ use App\Categories;
 use App\Comments;
 use App\DownVote;
 use App\Http\Requests\BooksRequest;
+use App\Regulamin;
 use App\Upvote;
 use App\User;
 use Illuminate\Http\Request;
@@ -34,6 +35,20 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function edit_regulamin(Regulamin $regulamin)
+    {
+        return view('books.regulamin.edit_regulamin', compact('regulamin'));
+    }
+
+    public function save_edit_regulamin(Request $request, Regulamin $regulamin)
+    {
+        $reg = Regulamin::find($request->id);
+        $reg->content = $request->content;
+        $reg->save();
+        return redirect()->route('books.regulamin');
+    }
+
     public function index()
     {
         $category = Categories::all();

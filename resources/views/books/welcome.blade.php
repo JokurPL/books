@@ -12,10 +12,10 @@
             </ol>
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img class="d-block w-100" src="https://i.imgur.com/jk88jJ7.jpg" alt="First slide">
+                    <img class="d-block w-100" src="https://i.imgur.com/KXt6u8i.png" alt="First slide">
                 </div>
                 <div class="carousel-item">
-                    <img class="d-block w-100" src="https://i.imgur.com/jk88jJ7.jpg" alt="Second slide">
+                    <img class="d-block w-100" src="https://i.imgur.com/QxHKLlu.png" alt="Second slide">
                 </div>
                 <div class="carousel-item">
                     <img class="d-block w-100" src="https://i.imgur.com/jk88jJ7.jpg" alt="Third slide">

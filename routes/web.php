@@ -16,6 +16,11 @@ Route::get('/', [
     'uses' => 'MainController@index'
 ]);
 
+Route::get('/regulamin', [
+    'as' => 'books.regulamin',
+    'uses' => 'MainController@regulamin'
+]);
+
 Route::group([
     'middleware' => 'roles',
     'roles' => 'Administrator',
@@ -31,6 +36,15 @@ Route::group([
         'as' => 'books.com_destroy'
     ]);
 
+    Route::get('/regulamin/edytuj/{regulamin}', [
+        'as' => 'books.edit-regulamin',
+        'uses' => 'HomeController@edit_regulamin'
+    ]);
+
+    Route::put('/regulamin/edytuj/zapisz/', [
+        'as' => 'books.save_edit_regulamin',
+        'uses' => 'HomeController@save_edit_regulamin'
+    ]);
 
 });
 
@@ -174,7 +188,7 @@ Route::get('/uzytkownik/{user}', [
     'uses' => 'UserController@user'
 ]);
 
-Route::post('/zajerestruj-siee/', [
+Route::post('/zajerestruj-sie/', [
     'as' => 'books.register',
     'uses' => 'RegController@index'
 ]);

@@ -26,7 +26,7 @@
                 <a class="nav-link" href="#">Wszystkie książki</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Bestsellery</a>
+                <a class="nav-link" href="{{ route('books.regulamin') }}">Regulamin</a>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

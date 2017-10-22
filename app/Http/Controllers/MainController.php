@@ -6,6 +6,7 @@ use App\Author;
 use App\Books;
 use App\Categories;
 use App\Comments;
+use App\Regulamin;
 use App\Roles;
 use App\Upvote;
 use App\User;
@@ -22,6 +23,12 @@ class MainController extends Controller
     public function index() {
         $books = Books::paginate(15);
         return view('books.welcome', compact('books'));
+    }
+
+    public function regulamin()
+    {
+        $regulamin = Regulamin::first();
+        return view('books.regulamin.regulamin', compact('regulamin'));
     }
 
     public function single(Books $book) {
